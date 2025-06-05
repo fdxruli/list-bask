@@ -627,4 +627,131 @@
                     case 'present':
                         present.push(person.name);
                         break;
-                    case 
+                    case 'absent':
+                        absent.push(person.name);
+                        break;
+                    case 'permission':
+                        permissions.push(person.name);
+                        break;
+                }
+            });
+
+            if (present.length > 0) {
+                message += `✅ *Presentes (${present.length}):*\n${present.map(name => `• ${name}`).join('\n')}\n\n`;
+            }
+
+            if (absent.length > 0) {
+                message += `❌ *Ausentes (${absent.length}):*\n${absent.map(name => `• ${name}`).join('\n')}\n\n`;
+            }
+
+            if (permissions.length > 0) {
+                message += `📝 *Con Permiso (${permissions.length}):*\n${permissions.map(name => `• ${name}`).join('\n')}\n\n`;
+            }
+
+            const encodedMessage = encodeURIComponent(message);
+            window.open(`https://wa.me/?text=${encodedMessage}`, '_blank');
+        }
+
+        // Funciones de adeudos
+        function loadDebtsTab() {
+            const debtsList = document.getElementById('debtsList');
+            const totalDebtElement = document.getElementById('totalDebt');
+            const debtorsCountElement = document.getElementById('debtorsCount');
+
+            const peopleWithDebt = people.filter(person => person.debt > 0);
+            const totalDebt = peopleWithDebt.reduce((sum, person) => sum + person.debt, 0);
+
+            totalDebtElement.textContent = `$${totalDebt}`;
+            debtorsCountElement.textContent = peopleWithDebt.length;
+
+            if (peopleWithDebt.length === 0) {
+                debtsList.innerHTML = '<div class="empty-state">No hay adeudos pendientes</div>';
+                return;
+            }
+
+            debtsList.innerHTML = peopleWithDebt.map(person => `
+                <div class="debt-item">
+                    <div>
+                        <strong>${person.name}</strong>
+                        <div class="date-info">Deuda acumulada</div>
+                    </div>
+                    <div class="debt-amount">$${person.debt}</div>
+                </div>
+            `).join('');
+        }
+
+        function shareDebts() {
+            const peopleWithDebt = people.filter(person => person.debt > 0);
+            
+            if (peopleWithDebt.length === 0) {
+                alert('No hay adeudos que compartir');
+                return;
+            }
+
+            const totalDebt = peopleWithDebt.reduce((sum, person) => sum + person.debt, 0);
+            
+            let message = `💰 *Reporte de Adeudos*\n\n`;
+            message += `*Total: $${totalDebt}*\n\n`;
+            
+            peopleWithDebt.forEach(person => {
+                message += `• ${person.name}: $${person.debt}\n`;
+            });
+
+            const encodedMessage = encodeURIComponent(message);
+            window.open(`https://wa.me/?text=${encodedMessage}`, '_blank');
+        }
+
+        // Funciones de historial
+        function loadHistoryTab() {
+            const historyList = document.getElementById('historyList');
+            
+            if (attendanceHistory.length === 0) {
+                historyList.innerHTML = '<div class="empty-state">No hay historial de asistencia</div>';
+                return;
+            }
+
+            historyList.innerHTML = attendanceHistory.slice().reverse().map(record => {
+                const present = Object.values(record.records).filter(status => status === 'present').length;
+                const absent = Object.values(record.records).filter(status => status === 'absent').length;
+                const permissions = Object.values(record.records).filter(status => status === 'permission').length;
+
+                return `
+                    <div class="attendance-item">
+                        <div>
+                            <strong>${record.date}</strong>
+                            <div class="date-info">
+                                Presentes: ${present} | Ausentes: ${absent} | Permisos: ${permissions}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function clearAllData() {
+            if (confirm('¿Estás seguro de eliminar todos los datos? Esta acción no se puede deshacer.')) {
+                people = [];
+                attendanceHistory = [];
+                currentAttendance = null;
+                weeklyPermissions = {};
+                
+                localStorage.removeItem('people');
+                localStorage.removeItem('attendanceHistory');
+                localStorage.removeItem('weeklyPermissions');
+                
+                loadPeopleList();
+                loadAttendanceTab();
+                loadDebtsTab();
+                loadHistoryTab();
+                
+                alert('Todos los datos han sido eliminados');
+            }
+        }
+
+        // Inicializar la aplicación
+        document.addEventListener('DOMContentLoaded', function() {
+            loadPeopleList();
+        });
+    </script>
+</body>
+</html>
