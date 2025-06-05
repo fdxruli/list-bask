@@ -5,6 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pase de Lista Mejorado</title>
     <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --secondary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --success-color: #28a745;
+            --warning-color: #ffc107;
+            --danger-color: #dc3545;
+            --info-color: #17a2b8;
+            --light-bg: #f8f9fa;
+            --border-color: #e9ecef;
+            --text-muted: #6c757d;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -13,7 +25,7 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: var(--secondary-gradient);
             min-height: 100vh;
             padding: 10px;
         }
@@ -29,7 +41,7 @@
         }
 
         .header {
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            background: var(--primary-gradient);
             color: white;
             padding: 20px;
             text-align: center;
@@ -42,7 +54,7 @@
 
         .tabs {
             display: flex;
-            background: #f8f9fa;
+            background: var(--light-bg);
         }
 
         .tab {
@@ -85,7 +97,7 @@
         .input-group input {
             width: 100%;
             padding: 12px;
-            border: 2px solid #e9ecef;
+            border: 2px solid var(--border-color);
             border-radius: 8px;
             font-size: 16px;
             transition: border-color 0.3s ease;
@@ -106,110 +118,99 @@
             cursor: pointer;
             transition: all 0.3s ease;
             margin-bottom: 10px;
+            color: white;
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(79, 172, 254, 0.4);
+            background: var(--primary-gradient);
         }
 
         .btn-success {
-            background: #28a745;
-            color: white;
+            background: var(--success-color);
         }
 
         .btn-warning {
-            background: #ffc107;
+            background: var(--warning-color);
             color: #212529;
         }
 
         .btn-danger {
-            background: #dc3545;
-            color: white;
+            background: var(--danger-color);
         }
 
         .btn-info {
-            background: #17a2b8;
-            color: white;
+            background: var(--info-color);
         }
 
-        .person-list {
-            margin-top: 20px;
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 5px 15px rgba(79, 172, 254, 0.4);
+        }
+
+        .list-item {
+            padding: 10px;
+            margin-bottom: 10px;
+            background: var(--light-bg);
+            border-radius: 8px;
+            border-left: 4px solid;
         }
 
         .person-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px;
-            margin-bottom: 10px;
-            background: #f8f9fa;
-            border-radius: 8px;
-            border-left: 4px solid #4facfe;
-        }
-
-        .person-name {
-            font-weight: 500;
-        }
-
-        .person-actions {
-            display: flex;
-            gap: 5px;
-        }
-
-        .person-actions button {
-            padding: 5px 10px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 12px;
-            min-width: 60px;
+            border-color: #4facfe;
         }
 
         .attendance-item {
-            padding: 15px;
-            margin-bottom: 10px;
-            background: #f8f9fa;
-            border-radius: 8px;
-            border-left: 4px solid #28a745;
+            border-color: var(--success-color);
         }
 
         .attendance-present {
-            border-left-color: #28a745;
+            border-color: var(--success-color);
         }
 
         .attendance-absent {
-            border-left-color: #dc3545;
+            border-color: var(--danger-color);
         }
 
         .attendance-permission {
-            border-left-color: #ffc107;
+            border-color: var(--warning-color);
         }
 
         .debt-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px;
-            margin-bottom: 10px;
-            background: #f8f9fa;
-            border-radius: 8px;
-            border-left: 4px solid #dc3545;
+            border-color: var(--danger-color);
         }
 
-        .debt-amount {
-            font-weight: bold;
-            color: #dc3545;
+        .item-name {
+            font-weight: 500;
+        }
+
+        .item-actions {
+            display: flex;
+            gap: 5px;
+        }
+
+        .item-actions button {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
+            min-width: 60px;
+            color: white;
         }
 
         .date-info {
             font-size: 12px;
-            color: #6c757d;
+            color: var(--text-muted);
             margin-bottom: 5px;
         }
 
@@ -222,7 +223,7 @@
 
         .stat-card {
             padding: 15px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: var(--secondary-gradient);
             color: white;
             border-radius: 8px;
             text-align: center;
@@ -238,23 +239,10 @@
             opacity: 0.9;
         }
 
-        .alert {
-            padding: 10px;
-            margin-bottom: 15px;
-            border-radius: 5px;
-            font-size: 14px;
-        }
-
-        .alert-warning {
-            background: #fff3cd;
-            border: 1px solid #ffeaa7;
-            color: #856404;
-        }
-
         .empty-state {
             text-align: center;
             padding: 30px;
-            color: #6c757d;
+            color: var(--text-muted);
         }
 
         @media (max-width: 480px) {
@@ -264,12 +252,12 @@
                 min-height: 100vh;
             }
             
-            .person-actions {
+            .item-actions {
                 flex-direction: column;
                 gap: 3px;
             }
             
-            .person-actions button {
+            .item-actions button {
                 font-size: 11px;
                 padding: 4px 8px;
             }
@@ -284,10 +272,10 @@
         </div>
 
         <div class="tabs">
-            <button class="tab active" onclick="showTab('manage')">Gestionar</button>
-            <button class="tab" onclick="showTab('attendance')">Asistencia</button>
-            <button class="tab" onclick="showTab('debts')">Adeudos</button>
-            <button class="tab" onclick="showTab('history')">Historial</button>
+            <button class="tab active" data-tab="manage">Gestionar</button>
+            <button class="tab" data-tab="attendance">Asistencia</button>
+            <button class="tab" data-tab="debts">Adeudos</button>
+            <button class="tab" data-tab="history">Historial</button>
         </div>
 
         <!-- Tab: Gestionar Personas -->
@@ -296,11 +284,9 @@
                 <label for="personName">Agregar Nueva Persona:</label>
                 <input type="text" id="personName" placeholder="Nombre completo">
             </div>
-            <button class="btn btn-primary" onclick="addPerson()">➕ Agregar Persona</button>
+            <button class="btn btn-primary" id="addPersonBtn">➕ Agregar Persona</button>
             
-            <div class="person-list" id="personList">
-                <!-- Personas se cargan aquí -->
-            </div>
+            <div class="person-list" id="personList"></div>
         </div>
 
         <!-- Tab: Pase de Asistencia -->
@@ -316,13 +302,11 @@
                 </div>
             </div>
             
-            <button class="btn btn-primary" onclick="startAttendance()">📝 Iniciar Pase de Lista</button>
-            <button class="btn btn-info" onclick="shareAttendance()">📤 Compartir por WhatsApp</button>
-            <button class="btn btn-danger" onclick="finishAttendance()">🏁 Finalizar Lista</button>
+            <button class="btn btn-primary" id="startAttendanceBtn">📝 Iniciar Pase de Lista</button>
+            <button class="btn btn-info" id="shareAttendanceBtn">📤 Compartir por WhatsApp</button>
+            <button class="btn btn-danger" id="finishAttendanceBtn">🏁 Finalizar Lista</button>
             
-            <div id="attendanceList">
-                <!-- Lista de asistencia se carga aquí -->
-            </div>
+            <div id="attendanceList"></div>
         </div>
 
         <!-- Tab: Adeudos -->
@@ -338,420 +322,460 @@
                 </div>
             </div>
             
-            <button class="btn btn-info" onclick="shareDebts()">📤 Compartir Adeudos</button>
+            <button class="btn btn-info" id="shareDebtsBtn">📤 Compartir Adeudos</button>
             
-            <div id="debtsList">
-                <!-- Lista de adeudos se carga aquí -->
-            </div>
+            <div id="debtsList"></div>
         </div>
 
         <!-- Tab: Historial -->
         <div id="history" class="tab-content">
-            <button class="btn btn-danger" onclick="clearAllData()" style="margin-bottom: 15px;">🗑️ Limpiar Todo</button>
+            <button class="btn btn-danger" id="clearAllDataBtn">🗑️ Limpiar Todo</button>
             
-            <div id="historyList">
-                <!-- Historial se carga aquí -->
-            </div>
+            <div id="historyList"></div>
         </div>
     </div>
 
     <script>
-        // Variables globales mejoradas
-        let people = JSON.parse(localStorage.getItem('people') || '[]');
-        let attendanceHistory = JSON.parse(localStorage.getItem('attendanceHistory') || '[]'); // Corregido: era [] sin comillas
-        let currentAttendance = null;
-        let weeklyPermissions = JSON.parse(localStorage.getItem('weeklyPermissions') || '{}');
-
-        // Funciones de utilidad mejoradas
-        function saveData() {
-            localStorage.setItem('people', JSON.stringify(people));
-            localStorage.setItem('attendanceHistory', JSON.stringify(attendanceHistory));
-            localStorage.setItem('weeklyPermissions', JSON.stringify(weeklyPermissions));
-        }
-
-        // Función de semana ISO mejorada
-        function getCurrentWeek() {
-            const date = new Date();
-            date.setHours(0, 0, 0, 0);
-            date.setDate(date.getDate() + 3 - (date.getDay() + 6) % 7);
-            const week1 = new Date(date.getFullYear(), 0, 4);
-            const weekNumber = 1 + Math.round(((date.getTime() - week1.getTime()) / 86400000 - 3 + (week1.getDay() + 6) % 7) / 7);
+        // Clase principal de la aplicación
+        class AttendanceApp {
+            constructor() {
+                this.people = JSON.parse(localStorage.getItem('people') || [];
+                this.attendanceHistory = JSON.parse(localStorage.getItem('attendanceHistory') || '[]');
+                this.currentAttendance = null;
+                this.weeklyPermissions = JSON.parse(localStorage.getItem('weeklyPermissions') || {};
+                
+                this.initElements();
+                this.initEvents();
+                this.loadInitialTab();
+            }
             
-            return `${date.getFullYear()}-W${weekNumber.toString().padStart(2, '0')}`;
-        }
-
-        function getCurrentDate() {
-            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-            return new Date().toLocaleDateString('es-ES', options);
-        }
-
-        function showTab(tabName) {
-            document.querySelectorAll('.tab-content').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            document.querySelectorAll('.tab').forEach(tab => {
-                tab.classList.remove('active');
-            });
-
-            document.getElementById(tabName).classList.add('active');
-            event.target.classList.add('active');
-
-            switch(tabName) {
-                case 'manage':
-                    loadPeopleList();
-                    break;
-                case 'attendance':
-                    loadAttendanceTab();
-                    break;
-                case 'debts':
-                    loadDebtsTab();
-                    break;
-                case 'history':
-                    loadHistoryTab();
-                    break;
+            initElements() {
+                // Elementos del DOM
+                this.elements = {
+                    tabs: document.querySelectorAll('.tab'),
+                    tabContents: document.querySelectorAll('.tab-content'),
+                    personNameInput: document.getElementById('personName'),
+                    addPersonBtn: document.getElementById('addPersonBtn'),
+                    personList: document.getElementById('personList'),
+                    startAttendanceBtn: document.getElementById('startAttendanceBtn'),
+                    shareAttendanceBtn: document.getElementById('shareAttendanceBtn'),
+                    finishAttendanceBtn: document.getElementById('finishAttendanceBtn'),
+                    attendanceList: document.getElementById('attendanceList'),
+                    presentCount: document.getElementById('presentCount'),
+                    absentCount: document.getElementById('absentCount'),
+                    shareDebtsBtn: document.getElementById('shareDebtsBtn'),
+                    debtsList: document.getElementById('debtsList'),
+                    totalDebt: document.getElementById('totalDebt'),
+                    debtorsCount: document.getElementById('debtorsCount'),
+                    clearAllDataBtn: document.getElementById('clearAllDataBtn'),
+                    historyList: document.getElementById('historyList')
+                };
             }
-        }
-
-        // Gestión de personas
-        function addPerson() {
-            const nameInput = document.getElementById('personName');
-            const name = nameInput.value.trim();
-
-            if (name === '') {
-                alert('Por favor ingresa un nombre');
-                return;
-            }
-
-            if (people.some(person => person.name.toLowerCase() === name.toLowerCase())) {
-                alert('Esta persona ya existe en la lista');
-                return;
-            }
-
-            people.push({
-                id: Date.now(),
-                name: name,
-                debt: 0
-            });
-
-            saveData();
-            nameInput.value = '';
-            loadPeopleList();
-        }
-
-        function removePerson(id) {
-            if (confirm('¿Estás seguro de eliminar esta persona y todos sus registros?')) {
-                people = people.filter(person => person.id !== id);
-                attendanceHistory = attendanceHistory.map(record => {
-                    delete record.records[id];
-                    return record;
+            
+            initEvents() {
+                // Eventos de pestañas
+                this.elements.tabs.forEach(tab => {
+                    tab.addEventListener('click', () => this.showTab(tab.dataset.tab));
                 });
-                saveData();
-                loadPeopleList();
+                
+                // Eventos de gestión de personas
+                this.elements.addPersonBtn.addEventListener('click', () => this.addPerson());
+                this.elements.personNameInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') this.addPerson();
+                });
+                
+                // Eventos de asistencia
+                this.elements.startAttendanceBtn.addEventListener('click', () => this.startAttendance());
+                this.elements.shareAttendanceBtn.addEventListener('click', () => this.shareAttendance());
+                this.elements.finishAttendanceBtn.addEventListener('click', () => this.finishAttendance());
+                
+                // Eventos de adeudos
+                this.elements.shareDebtsBtn.addEventListener('click', () => this.shareDebts());
+                
+                // Eventos de historial
+                this.elements.clearAllDataBtn.addEventListener('click', () => this.clearAllData());
             }
-        }
-
-        function loadPeopleList() {
-            const listContainer = document.getElementById('personList');
             
-            if (people.length === 0) {
-                listContainer.innerHTML = '<div class="empty-state">No hay personas registradas</div>';
-                return;
+            loadInitialTab() {
+                this.loadPeopleList();
             }
-
-            listContainer.innerHTML = people.map(person => `
-                <div class="person-item">
-                    <span class="person-name">${person.name}</span>
-                    <div class="person-actions">
-                        <button class="btn-danger" onclick="removePerson(${person.id})">Eliminar</button>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        // Pase de asistencia mejorado
-        function startAttendance() {
-            if (people.length === 0) {
-                alert('Primero debes agregar personas a la lista');
-                return;
+            
+            // Funciones de utilidad
+            saveData() {
+                localStorage.setItem('people', JSON.stringify(this.people));
+                localStorage.setItem('attendanceHistory', JSON.stringify(this.attendanceHistory));
+                localStorage.setItem('weeklyPermissions', JSON.stringify(this.weeklyPermissions));
             }
-
-            if (currentAttendance && Object.keys(currentAttendance.records).length > 0) {
-                if (!confirm('Hay un pase de lista en progreso. ¿Deseas iniciar uno nuevo?')) {
+            
+            getCurrentWeek() {
+                const date = new Date();
+                date.setHours(0, 0, 0, 0);
+                date.setDate(date.getDate() + 3 - (date.getDay() + 6) % 7);
+                const week1 = new Date(date.getFullYear(), 0, 4);
+                const weekNumber = 1 + Math.round(((date.getTime() - week1.getTime()) / 86400000 - 3 + (week1.getDay() + 6) % 7) / 7);
+                
+                return `${date.getFullYear()}-W${weekNumber.toString().padStart(2, '0')}`;
+            }
+            
+            getCurrentDate() {
+                const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                return new Date().toLocaleDateString('es-ES', options);
+            }
+            
+            // Gestión de pestañas
+            showTab(tabName) {
+                this.elements.tabContents.forEach(tab => tab.classList.remove('active'));
+                this.elements.tabs.forEach(tab => tab.classList.remove('active'));
+                
+                document.getElementById(tabName).classList.add('active');
+                document.querySelector(`.tab[data-tab="${tabName}"]`).classList.add('active');
+                
+                switch(tabName) {
+                    case 'manage':
+                        this.loadPeopleList();
+                        break;
+                    case 'attendance':
+                        this.loadAttendanceTab();
+                        break;
+                    case 'debts':
+                        this.loadDebtsTab();
+                        break;
+                    case 'history':
+                        this.loadHistoryTab();
+                        break;
+                }
+            }
+            
+            // Gestión de personas
+            addPerson() {
+                const name = this.elements.personNameInput.value.trim();
+                
+                if (!name) {
+                    alert('Por favor ingresa un nombre');
                     return;
                 }
-            }
-
-            currentAttendance = {
-                date: getCurrentDate(),
-                records: {}
-            };
-
-            people.forEach(person => {
-                currentAttendance.records[person.id] = null;
-            });
-
-            loadAttendanceList();
-        }
-
-        function finishAttendance() {
-            if (!currentAttendance || Object.keys(currentAttendance.records).length === 0) {
-                alert('No hay pase de lista activo para finalizar');
-                return;
-            }
-            
-            if (confirm('¿Finalizar el pase de lista actual?')) {
-                // Guardar en historial antes de limpiar
-                attendanceHistory.push({
-                    ...currentAttendance,
-                    timestamp: new Date().toISOString()
-                });
-                saveData();
                 
-                currentAttendance = null;
-                loadAttendanceTab();
-            }
-        }
-
-        function markAttendance(personId, status) {
-            const currentWeek = getCurrentWeek();
-            const person = people.find(p => p.id === personId);
-
-            if (status === 'permission') {
-                if (!weeklyPermissions[currentWeek]) {
-                    weeklyPermissions[currentWeek] = {};
+                if (this.people.some(person => person.name.toLowerCase() === name.toLowerCase())) {
+                    alert('Esta persona ya existe en la lista');
+                    return;
                 }
-
-                if (weeklyPermissions[currentWeek][personId]) {
-                    alert(`${person.name} ya usó su permiso esta semana. Se marcará como ausente.`);
-                    status = 'absent';
-                } else {
-                    weeklyPermissions[currentWeek][personId] = true;
-                }
+                
+                this.people.push({
+                    id: Date.now(),
+                    name,
+                    debt: 0
+                });
+                
+                this.saveData();
+                this.elements.personNameInput.value = '';
+                this.loadPeopleList();
             }
-
-            currentAttendance.records[personId] = status;
-
-            if (status === 'absent') {
-                person.debt += 10;
-            }
-
-            saveData();
-            loadAttendanceList();
-            updateAttendanceStats();
-        }
-
-        function loadAttendanceTab() {
-            const listContainer = document.getElementById('attendanceList');
             
-            if (!currentAttendance || Object.keys(currentAttendance.records).length === 0) {
-                listContainer.innerHTML = '<div class="empty-state">Inicia un pase de lista para comenzar</div>';
-                document.getElementById('presentCount').textContent = '0';
-                document.getElementById('absentCount').textContent = '0';
-                return;
-            }
-
-            loadAttendanceList();
-        }
-
-        function loadAttendanceList() {
-            const listContainer = document.getElementById('attendanceList');
-            
-            if (!currentAttendance || Object.keys(currentAttendance.records).length === 0) {
-                listContainer.innerHTML = '<div class="empty-state">Inicia un pase de lista para comenzar</div>';
-                return;
-            }
-
-            listContainer.innerHTML = people.map(person => {
-                const status = currentAttendance.records[person.id];
-                let statusClass = '';
-                let statusText = 'Sin marcar';
-
-                switch(status) {
-                    case 'present':
-                        statusClass = 'attendance-present';
-                        statusText = '✅ Presente';
-                        break;
-                    case 'absent':
-                        statusClass = 'attendance-absent';
-                        statusText = '❌ Ausente';
-                        break;
-                    case 'permission':
-                        statusClass = 'attendance-permission';
-                        statusText = '📝 Permiso';
-                        break;
+            removePerson(id) {
+                if (confirm('¿Estás seguro de eliminar esta persona y todos sus registros?')) {
+                    this.people = this.people.filter(person => person.id !== id);
+                    this.attendanceHistory = this.attendanceHistory.map(record => {
+                        delete record.records[id];
+                        return record;
+                    });
+                    this.saveData();
+                    this.loadPeopleList();
                 }
-
-                return `
-                    <div class="attendance-item ${statusClass}">
-                        <div>
-                            <strong>${person.name}</strong>
-                            <div class="date-info">${statusText}</div>
-                        </div>
-                        <div class="person-actions">
-                            <button class="btn-success" onclick="markAttendance(${person.id}, 'present')">Presente</button>
-                            <button class="btn-danger" onclick="markAttendance(${person.id}, 'absent')">Ausente</button>
-                            <button class="btn-warning" onclick="markAttendance(${person.id}, 'permission')">Permiso</button>
+            }
+            
+            loadPeopleList() {
+                if (this.people.length === 0) {
+                    this.elements.personList.innerHTML = '<div class="empty-state">No hay personas registradas</div>';
+                    return;
+                }
+                
+                this.elements.personList.innerHTML = this.people.map(person => `
+                    <div class="list-item person-item">
+                        <span class="item-name">${person.name}</span>
+                        <div class="item-actions">
+                            <button class="btn-danger" onclick="app.removePerson(${person.id})">Eliminar</button>
                         </div>
                     </div>
-                `;
-            }).join('');
-
-            updateAttendanceStats();
-        }
-
-        function updateAttendanceStats() {
-            if (!currentAttendance) return;
-
-            const present = Object.values(currentAttendance.records).filter(status => status === 'present').length;
-            const absent = Object.values(currentAttendance.records).filter(status => status === 'absent').length;
-
-            document.getElementById('presentCount').textContent = present;
-            document.getElementById('absentCount').textContent = absent;
-        }
-
-        function shareAttendance() {
-            if (!currentAttendance || Object.keys(currentAttendance.records).length === 0) {
-                alert('Primero debes realizar un pase de lista');
-                return;
+                `).join('');
             }
-
-            let message = `📋 *Pase de Lista - ${currentAttendance.date}*\n\n`;
-
-            const present = [];
-            const absent = [];
-            const permissions = [];
-
-            people.forEach(person => {
-                const status = currentAttendance.records[person.id];
-                switch(status) {
-                    case 'present':
-                        present.push(person.name);
-                        break;
-                    case 'absent':
-                        absent.push(person.name);
-                        break;
-                    case 'permission':
-                        permissions.push(person.name);
-                        break;
+            
+            // Pase de asistencia
+            startAttendance() {
+                if (this.people.length === 0) {
+                    alert('Primero debes agregar personas a la lista');
+                    return;
                 }
-            });
-
-            if (present.length > 0) {
-                message += `✅ *Presentes (${present.length}):*\n${present.map(name => `• ${name}`).join('\n')}\n\n`;
+                
+                if (this.currentAttendance && Object.keys(this.currentAttendance.records).length > 0) {
+                    if (!confirm('Hay un pase de lista en progreso. ¿Deseas iniciar uno nuevo?')) {
+                        return;
+                    }
+                }
+                
+                this.currentAttendance = {
+                    date: this.getCurrentDate(),
+                    records: {}
+                };
+                
+                this.people.forEach(person => {
+                    this.currentAttendance.records[person.id] = null;
+                });
+                
+                this.loadAttendanceList();
             }
-
-            if (absent.length > 0) {
-                message += `❌ *Ausentes (${absent.length}):*\n${absent.map(name => `• ${name}`).join('\n')}\n\n`;
-            }
-
-            if (permissions.length > 0) {
-                message += `📝 *Con Permiso (${permissions.length}):*\n${permissions.map(name => `• ${name}`).join('\n')}\n\n`;
-            }
-
-            const encodedMessage = encodeURIComponent(message);
-            window.open(`https://wa.me/?text=${encodedMessage}`, '_blank');
-        }
-
-        // Funciones de adeudos
-        function loadDebtsTab() {
-            const debtsList = document.getElementById('debtsList');
-            const totalDebtElement = document.getElementById('totalDebt');
-            const debtorsCountElement = document.getElementById('debtorsCount');
-
-            const peopleWithDebt = people.filter(person => person.debt > 0);
-            const totalDebt = peopleWithDebt.reduce((sum, person) => sum + person.debt, 0);
-
-            totalDebtElement.textContent = `$${totalDebt}`;
-            debtorsCountElement.textContent = peopleWithDebt.length;
-
-            if (peopleWithDebt.length === 0) {
-                debtsList.innerHTML = '<div class="empty-state">No hay adeudos pendientes</div>';
-                return;
-            }
-
-            debtsList.innerHTML = peopleWithDebt.map(person => `
-                <div class="debt-item">
-                    <div>
-                        <strong>${person.name}</strong>
-                        <div class="date-info">Deuda acumulada</div>
-                    </div>
-                    <div class="debt-amount">$${person.debt}</div>
-                </div>
-            `).join('');
-        }
-
-        function shareDebts() {
-            const peopleWithDebt = people.filter(person => person.debt > 0);
             
-            if (peopleWithDebt.length === 0) {
-                alert('No hay adeudos que compartir');
-                return;
+            finishAttendance() {
+                if (!this.currentAttendance || Object.keys(this.currentAttendance.records).length === 0) {
+                    alert('No hay pase de lista activo para finalizar');
+                    return;
+                }
+                
+                if (confirm('¿Finalizar el pase de lista actual?')) {
+                    this.attendanceHistory.push({
+                        ...this.currentAttendance,
+                        timestamp: new Date().toISOString()
+                    });
+                    this.saveData();
+                    
+                    this.currentAttendance = null;
+                    this.loadAttendanceTab();
+                }
             }
-
-            const totalDebt = peopleWithDebt.reduce((sum, person) => sum + person.debt, 0);
             
-            let message = `💰 *Reporte de Adeudos*\n\n`;
-            message += `*Total: $${totalDebt}*\n\n`;
-            
-            peopleWithDebt.forEach(person => {
-                message += `• ${person.name}: $${person.debt}\n`;
-            });
-
-            const encodedMessage = encodeURIComponent(message);
-            window.open(`https://wa.me/?text=${encodedMessage}`, '_blank');
-        }
-
-        // Funciones de historial
-        function loadHistoryTab() {
-            const historyList = document.getElementById('historyList');
-            
-            if (attendanceHistory.length === 0) {
-                historyList.innerHTML = '<div class="empty-state">No hay historial de asistencia</div>';
-                return;
+            markAttendance(personId, status) {
+                const currentWeek = this.getCurrentWeek();
+                const person = this.people.find(p => p.id === personId);
+                
+                if (status === 'permission') {
+                    if (!this.weeklyPermissions[currentWeek]) {
+                        this.weeklyPermissions[currentWeek] = {};
+                    }
+                    
+                    if (this.weeklyPermissions[currentWeek][personId]) {
+                        alert(`${person.name} ya usó su permiso esta semana. Se marcará como ausente.`);
+                        status = 'absent';
+                    } else {
+                        this.weeklyPermissions[currentWeek][personId] = true;
+                    }
+                }
+                
+                this.currentAttendance.records[personId] = status;
+                
+                if (status === 'absent') {
+                    person.debt += 10;
+                }
+                
+                this.saveData();
+                this.loadAttendanceList();
+                this.updateAttendanceStats();
             }
-
-            historyList.innerHTML = attendanceHistory.slice().reverse().map(record => {
-                const present = Object.values(record.records).filter(status => status === 'present').length;
-                const absent = Object.values(record.records).filter(status => status === 'absent').length;
-                const permissions = Object.values(record.records).filter(status => status === 'permission').length;
-
-                return `
-                    <div class="attendance-item">
-                        <div>
-                            <strong>${record.date}</strong>
-                            <div class="date-info">
-                                Presentes: ${present} | Ausentes: ${absent} | Permisos: ${permissions}
+            
+            loadAttendanceTab() {
+                if (!this.currentAttendance || Object.keys(this.currentAttendance.records).length === 0) {
+                    this.elements.attendanceList.innerHTML = '<div class="empty-state">Inicia un pase de lista para comenzar</div>';
+                    this.elements.presentCount.textContent = '0';
+                    this.elements.absentCount.textContent = '0';
+                    return;
+                }
+                
+                this.loadAttendanceList();
+            }
+            
+            loadAttendanceList() {
+                if (!this.currentAttendance || Object.keys(this.currentAttendance.records).length === 0) {
+                    this.elements.attendanceList.innerHTML = '<div class="empty-state">Inicia un pase de lista para comenzar</div>';
+                    return;
+                }
+                
+                this.elements.attendanceList.innerHTML = this.people.map(person => {
+                    const status = this.currentAttendance.records[person.id];
+                    let statusClass = '';
+                    let statusText = 'Sin marcar';
+                    
+                    switch(status) {
+                        case 'present':
+                            statusClass = 'attendance-present';
+                            statusText = '✅ Presente';
+                            break;
+                        case 'absent':
+                            statusClass = 'attendance-absent';
+                            statusText = '❌ Ausente';
+                            break;
+                        case 'permission':
+                            statusClass = 'attendance-permission';
+                            statusText = '📝 Permiso';
+                            break;
+                    }
+                    
+                    return `
+                        <div class="list-item attendance-item ${statusClass}">
+                            <div>
+                                <strong>${person.name}</strong>
+                                <div class="date-info">${statusText}</div>
+                            </div>
+                            <div class="item-actions">
+                                <button class="btn-success" onclick="app.markAttendance(${person.id}, 'present')">Presente</button>
+                                <button class="btn-danger" onclick="app.markAttendance(${person.id}, 'absent')">Ausente</button>
+                                <button class="btn-warning" onclick="app.markAttendance(${person.id}, 'permission')">Permiso</button>
                             </div>
                         </div>
+                    `;
+                }).join('');
+                
+                this.updateAttendanceStats();
+            }
+            
+            updateAttendanceStats() {
+                if (!this.currentAttendance) return;
+                
+                const present = Object.values(this.currentAttendance.records).filter(status => status === 'present').length;
+                const absent = Object.values(this.currentAttendance.records).filter(status => status === 'absent').length;
+                
+                this.elements.presentCount.textContent = present;
+                this.elements.absentCount.textContent = absent;
+            }
+            
+            shareAttendance() {
+                if (!this.currentAttendance || Object.keys(this.currentAttendance.records).length === 0) {
+                    alert('Primero debes realizar un pase de lista');
+                    return;
+                }
+                
+                let message = `📋 *Pase de Lista - ${this.currentAttendance.date}*\n\n`;
+                
+                const present = [];
+                const absent = [];
+                const permissions = [];
+                
+                this.people.forEach(person => {
+                    const status = this.currentAttendance.records[person.id];
+                    switch(status) {
+                        case 'present':
+                            present.push(person.name);
+                            break;
+                        case 'absent':
+                            absent.push(person.name);
+                            break;
+                        case 'permission':
+                            permissions.push(person.name);
+                            break;
+                    }
+                });
+                
+                if (present.length > 0) {
+                    message += `✅ *Presentes (${present.length}):*\n${present.map(name => `• ${name}`).join('\n')}\n\n`;
+                }
+                
+                if (absent.length > 0) {
+                    message += `❌ *Ausentes (${absent.length}):*\n${absent.map(name => `• ${name}`).join('\n')}\n\n`;
+                }
+                
+                if (permissions.length > 0) {
+                    message += `📝 *Con Permiso (${permissions.length}):*\n${permissions.map(name => `• ${name}`).join('\n')}\n\n`;
+                }
+                
+                this.shareToWhatsApp(message);
+            }
+            
+            // Gestión de adeudos
+            loadDebtsTab() {
+                const peopleWithDebt = this.people.filter(person => person.debt > 0);
+                const totalDebt = peopleWithDebt.reduce((sum, person) => sum + person.debt, 0);
+                
+                this.elements.totalDebt.textContent = `$${totalDebt}`;
+                this.elements.debtorsCount.textContent = peopleWithDebt.length;
+                
+                if (peopleWithDebt.length === 0) {
+                    this.elements.debtsList.innerHTML = '<div class="empty-state">No hay adeudos pendientes</div>';
+                    return;
+                }
+                
+                this.elements.debtsList.innerHTML = peopleWithDebt.map(person => `
+                    <div class="list-item debt-item">
+                        <div>
+                            <strong>${person.name}</strong>
+                            <div class="date-info">Deuda acumulada</div>
+                        </div>
+                        <div class="item-name">$${person.debt}</div>
                     </div>
-                `;
-            }).join('');
-        }
-
-        function clearAllData() {
-            if (confirm('¿Estás seguro de eliminar todos los datos? Esta acción no se puede deshacer.')) {
-                people = [];
-                attendanceHistory = [];
-                currentAttendance = null;
-                weeklyPermissions = {};
+                `).join('');
+            }
+            
+            shareDebts() {
+                const peopleWithDebt = this.people.filter(person => person.debt > 0);
                 
-                localStorage.removeItem('people');
-                localStorage.removeItem('attendanceHistory');
-                localStorage.removeItem('weeklyPermissions');
+                if (peopleWithDebt.length === 0) {
+                    alert('No hay adeudos que compartir');
+                    return;
+                }
                 
-                loadPeopleList();
-                loadAttendanceTab();
-                loadDebtsTab();
-                loadHistoryTab();
+                const totalDebt = peopleWithDebt.reduce((sum, person) => sum + person.debt, 0);
                 
-                alert('Todos los datos han sido eliminados');
+                let message = `💰 *Reporte de Adeudos*\n\n`;
+                message += `*Total: $${totalDebt}*\n\n`;
+                
+                peopleWithDebt.forEach(person => {
+                    message += `• ${person.name}: $${person.debt}\n`;
+                });
+                
+                this.shareToWhatsApp(message);
+            }
+            
+            // Historial
+            loadHistoryTab() {
+                if (this.attendanceHistory.length === 0) {
+                    this.elements.historyList.innerHTML = '<div class="empty-state">No hay historial de asistencia</div>';
+                    return;
+                }
+                
+                this.elements.historyList.innerHTML = this.attendanceHistory.slice().reverse().map(record => {
+                    const present = Object.values(record.records).filter(status => status === 'present').length;
+                    const absent = Object.values(record.records).filter(status => status === 'absent').length;
+                    const permissions = Object.values(record.records).filter(status => status === 'permission').length;
+                    
+                    return `
+                        <div class="list-item attendance-item">
+                            <div>
+                                <strong>${record.date}</strong>
+                                <div class="date-info">
+                                    Presentes: ${present} | Ausentes: ${absent} | Permisos: ${permissions}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            }
+            
+            clearAllData() {
+                if (confirm('¿Estás seguro de eliminar todos los datos? Esta acción no se puede deshacer.')) {
+                    this.people = [];
+                    this.attendanceHistory = [];
+                    this.currentAttendance = null;
+                    this.weeklyPermissions = {};
+                    
+                    localStorage.removeItem('people');
+                    localStorage.removeItem('attendanceHistory');
+                    localStorage.removeItem('weeklyPermissions');
+                    
+                    this.loadPeopleList();
+                    this.loadAttendanceTab();
+                    this.loadDebtsTab();
+                    this.loadHistoryTab();
+                    
+                    alert('Todos los datos han sido eliminados');
+                }
+            }
+            
+            // Utilidades compartidas
+            shareToWhatsApp(message) {
+                const encodedMessage = encodeURIComponent(message);
+                window.open(`https://wa.me/?text=${encodedMessage}`, '_blank');
             }
         }
-
+        
         // Inicializar la aplicación
-        document.addEventListener('DOMContentLoaded', function() {
-            loadPeopleList();
-        });
+        const app = new AttendanceApp();
+        window.app = app; // Hacer accesible desde el DOM
     </script>
 </body>
 </html>
